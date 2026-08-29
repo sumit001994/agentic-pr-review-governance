@@ -1,0 +1,23 @@
+# Real, verified in the actual system: watched real CPU usage cross a configured
+# target under real generated load, watched the replica count rise in real time,
+# confirmed via the cluster's own event log ("SuccessfulRescale") - and confirmed
+# scaling back down again afterward, not just the scale-up half. Exact replica
+# bounds and CPU target omitted from this public skeleton.
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app
+  minReplicas: 1  # illustrative only - real value omitted from this public skeleton
+  maxReplicas: 10  # illustrative only - real value omitted from this public skeleton
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75  # illustrative only - real value omitted from this public skeleton
