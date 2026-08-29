@@ -1,9 +1,5 @@
-"""tests/test_llm_client.py - real unit tests for the credential-refresh timing
-logic, using a fake credentials object and a fake, controllable clock - no live
-network calls or real cloud connection involved.
-
-[Test bodies omitted - see README for real, verified pass/fail output.]
-"""
+"""tests/test_llm_client.py - unit tests for credential-refresh timing, using a
+fake credentials object and clock. [Test bodies omitted - see README.]"""
 
 
 def test_token_with_time_left_is_reused_not_refreshed():
@@ -11,8 +7,7 @@ def test_token_with_time_left_is_reused_not_refreshed():
 
 
 def test_token_inside_the_safety_window_is_refreshed():
-    """A token close to expiry must be refreshed, and the new token returned -
-    never the stale one."""
+    """A token close to expiry must be refreshed, never the stale one returned."""
 
 
 def test_expired_or_never_valid_token_is_refreshed():
@@ -20,8 +15,7 @@ def test_expired_or_never_valid_token_is_refreshed():
 
 
 def test_credential_with_no_expiry_is_left_alone():
-    """A credential type with no expiry concept must never be refreshed
-    pointlessly."""
+    """A credential type with no expiry must never be refreshed pointlessly."""
 
 
 def test_calling_get_valid_token_twice_in_a_row_only_refreshes_once():
@@ -29,5 +23,4 @@ def test_calling_get_valid_token_twice_in_a_row_only_refreshes_once():
 
 
 def test_agent_reasoning_loop_never_imports_the_credential_provider():
-    """Credential rotation must stay fully isolated from the logic that decides
-    what the agent does - a deliberate architectural boundary, not an accident."""
+    """Credential rotation must stay fully isolated from the agent's own logic."""
